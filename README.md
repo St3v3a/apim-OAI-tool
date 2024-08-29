@@ -70,7 +70,7 @@ When running the application for the first time, you'll need to configure the se
    python main.py
    ```
 1a. Control click the local server url
-![alt text](image.png) 
+or open browser and go to :  http://127.0.0.1:800
 
 2. Click on the "Settings" button or menu option.
 
