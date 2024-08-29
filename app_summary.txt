@@ -1,0 +1,54 @@
+FastAPI Application Summary
+
+1. Dependencies:
+   - FastAPI, Jinja2Templates, AzureOpenAI, httpx, csv, asyncio
+
+2. Main Components:
+   - FastAPI app
+   - Jinja2Templates for HTML rendering
+   - Custom HeaderCapturingTransport for capturing response headers
+   - AzureOpenAI client for API calls
+
+3. Key Functions:
+   - read_models(): Reads model names from "models.txt"
+   - read_messages_from_csv(): Reads messages from "messages.csv"
+
+4. Routes:
+   a. Root ("/"):
+      - Displays index.html with available models
+   
+   b. Chat ("/chat"):
+      - Handles both GET and POST requests
+      - Accepts parameters: model, message, mode, iterations
+      - Supports two modes: "basic" and "advanced"
+      - Uses streaming response for real-time updates
+
+5. Chat Functionality:
+   - Basic mode: Single iteration with a default system message
+   - Advanced mode: Multiple iterations using messages from CSV
+   - Generates AI responses using AzureOpenAI
+   - Captures and returns metadata (tokens, region, rate limits)
+
+6. Error Handling:
+   - Custom exception handlers for HTTP and general exceptions
+   - Detailed error logging in the chat function
+
+7. Configuration:
+   - AzureOpenAI client setup with endpoint and API key
+   - Models stored in "models.txt"
+   - Messages for advanced mode stored in "messages.csv"
+
+8. Frontend:
+   - Uses server-side rendering with Jinja2Templates
+   - index.html template (not provided in the code snippet)
+
+9. Run Configuration:
+   - Uses uvicorn to run the FastAPI app on localhost:8000
+
+Key Points for Recreation:
+- Ensure all dependencies are installed
+- Create "models.txt" with list of model names
+- Create "messages.csv" with system and user messages for advanced mode
+- Implement index.html template with form for chat input
+- Set up AzureOpenAI account and update credentials in the code
+- Implement error handling and logging as shown

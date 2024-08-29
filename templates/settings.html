@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        :root {
+            --bg-color: #e8e8e8;
+            --text-color: #2c3e50;
+            --container-bg: white;
+            --input-bg: #e0e0e0;
+            --input-text: #2c3e50;
+            --input-border: #c0c0c0;
+            --input-focus: #3498db;
+            --button-bg: #3498db;
+            --button-hover: #2980b9;
+            --response-bg: #f0f0f0;
+            --response-header: #2c3e50;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --container-bg: #2c2c2c;
+            --input-bg: #3a3a3a;
+            --input-text: #e0e0e0;
+            --input-border: #4a4a4a;
+            --input-focus: #3498db;
+            --button-bg: #3498db;
+            --button-hover: #2980b9;
+            --response-bg: #3a3a3a;
+            --response-header: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 3vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .settings-container {
+            background-color: var(--container-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 90%;
+            max-width: 700px;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--input-bg);
+            color: var(--input-text);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--response-bg);
+            margin: 0.5rem 0;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: fixed;  /* Change from absolute to fixed */
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;  /* Ensure it's above other elements */
+        }
+
+        .config-section {
+            margin-top: 2rem;
+            border-top: 1px solid var(--input-border);
+            padding-top: 1rem;
+        }
+
+        .config-form input[type="text"],
+        .config-form input[type="password"] {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .api-key-input {
+            font-family: monospace;
+        }
+
+        .config-description {
+            font-size: 0.9rem;
+            color: var(--metadata-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle">🌓</button>
+    <div class="settings-container">
+        <h1>Settings</h1>
+        
+        <!-- Existing Manage Models section -->
+        <h2>Manage Models</h2>
+        <form action="/add_model" method="post">
+            <input type="text" name="model" placeholder="Enter model name" required>
+            <button type="submit">Add Model</button>
+        </form>
+        <h3>Current Models:</h3>
+        <ul>
+            {% for model in models %}
+            <li>
+                <span>{{ model }}</span>
+                <form action="/remove_model" method="post" style="display: inline;">
+                    <input type="hidden" name="model" value="{{ model }}">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <!-- Updated AzureOpenAI Configuration section -->
+        <div class="config-section">
+            <h2>Azure APIM Configuration</h2>
+            <p class="config-description">
+                You can replace these values with your own Azure APIM configuration. 
+                Make sure to enter the complete endpoint URL, your API key, and the correct API version. 
+                Individual values can also be updated as required.
+            </p>
+            <form class="config-form" action="/update_config" method="post">
+                <label for="azure_endpoint">APIM Endpoint:</label>
+                <input type="text" id="azure_endpoint" name="azure_endpoint" value="{{ azure_endpoint }}">
+                
+                <label for="api_key">APIM Subscription Key (last 6 digits shown):</label>
+                <input type="text" id="api_key" name="api_key" value="{{ api_key }}" class="api-key-input">
+                <p class="config-description">
+                    To change the API key, enter a completely new value. If left unchanged, the existing key will be preserved.
+                </p>
+                
+                <label for="api_version">API Version:</label>
+                <input type="text" id="api_version" name="api_version" value="{{ api_version }}">
+                
+                <button type="submit">Update Configuration</button>
+            </form>
+        </div>
+
+        <a href="/" class="back-link">Back to Chat</a>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'light') {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check for saved theme preference or prefer-color-scheme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Update the form submission handler
+        document.querySelector('.config-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const updatedFields = new FormData();
+
+            for (const [key, value] of formData.entries()) {
+                if (value.trim() !== '') {
+                    updatedFields.append(key, value);
+                }
+            }
+
+            fetch('/update_config', {
+                method: 'POST',
+                body: updatedFields
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Failed to update configuration');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating configuration');
+            });
+        });
+    </script>
+</body>
+</html>

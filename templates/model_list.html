@@ -1,0 +1,14 @@
+<div class="space-y-2">
+    {% for model in model_history %}
+        <div class="flex items-center justify-between bg-gray-100 p-2 rounded">
+            <span class="model-option cursor-pointer">{{ model }}</span>
+            <button hx-post="/remove_model" 
+                    hx-trigger="click" 
+                    hx-target="#modelList" 
+                    hx-vals='{"model": "{{ model }}"}' 
+                    class="text-red-500 hover:text-red-700">
+                ×
+            </button>
+        </div>
+    {% endfor %}
+</div>
