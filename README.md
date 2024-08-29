@@ -17,6 +17,7 @@ This AI Chat Application is a lightweight, user-friendly interface for interacti
 
 - Git
 - Python 3.7 or higher
+- Conda (recommended for virtual environment management)
 
 ### Installation
 
@@ -26,7 +27,13 @@ This AI Chat Application is a lightweight, user-friendly interface for interacti
    cd ai-chat-app
    ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment using Conda:
+   ```bash
+   conda create -n ai-chat-env python=3.11
+   conda activate ai-chat-env
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -35,12 +42,17 @@ This AI Chat Application is a lightweight, user-friendly interface for interacti
 
 1. Ensure the `config.json` file is properly set up with your Azure API credentials.
 
-2. Run the main application script:
+2. Activate the virtual environment (if not already activated):
+   ```bash
+   conda activate ai-chat-env
+   ```
+
+3. Run the main application script:
    ```bash
    python main.py
    ```
 
-3. The application window should open, allowing you to start chatting with the AI.
+4. The application window should open, allowing you to start chatting with the AI.
 
 ### First-Time Setup
 
