@@ -72,7 +72,7 @@ When running the application for the first time, you'll need to configure the se
 1a. Control click the local server url
 or open browser and go to :  http://127.0.0.1:800
 
-2. Click on the "Settings" button (images/settings.png)
+2. Click on the "Settings" button ![settings](images/settings.png)
 
 3. In the Settings window:
    - Enter your Azure API endpoint URL
