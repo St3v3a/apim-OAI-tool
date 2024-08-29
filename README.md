@@ -1,6 +1,6 @@
 # AI Chat Application
 
-![Application Demo](picture1.gif)
+![Application Demo](images\picture1.gif)
 
 ## Description
 
@@ -55,7 +55,7 @@ Response headers are captured and displayed in the Iterations windows. Showing t
    ```
 
 3. Control click the local server url
-![alt text](image.png) 
+![alt text](images\image.png) 
 
 The application window should open in default browser 
 
