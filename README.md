@@ -1,6 +1,6 @@
 # AI Chat Application
 
-![Application Demo](images\picture1.gif)
+![architecture](images/Picture1.gif)
 
 ## Description
 
@@ -10,7 +10,7 @@ Response headers are captured and displayed in the Iterations windows. Showing t
 
 - Simple and intuitive chat interface for front end testing
 - Two modes basic and advanced with different iterations from provided .csv file 
-- Real-time AI responses (only displays first sentance") with headers captured
+- Real-time AI responses (only displays first sentence") with headers captured
 - Lightweight implementation using basic language features and standard library
 
 ## Getting Started
@@ -54,8 +54,10 @@ Response headers are captured and displayed in the Iterations windows. Showing t
    python main.py
    ```
 
-3. Control click the local server url
-![alt text](images\image.png) 
+3. Control click the local server url top open in default browser 
+![http://127.0.0.1:800](images/image.png)
+
+or open browser and go to :  http://127.0.0.1:800
 
 The application window should open in default browser 
 
