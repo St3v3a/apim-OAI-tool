@@ -6,7 +6,7 @@
 
 This AI Chat Application is a lightweight (Python fastAPI), user-friendly interface for testing with an AI model via Azure APIM with subscription keys.
 
-Response headers are captured and displayed in the Iterations windows. Showing token usage, the region is serviced by etc.
+Response headers are captured and displayed in the Iterations windows. Showing token usage, the region is serviced by etc. Will also display any server errors.
 
 - Simple and intuitive chat interface for front end testing
 - Two modes basic and advanced with different iterations from provided .csv file 
