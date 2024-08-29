@@ -4,7 +4,9 @@
 
 ## Description
 
-This AI Chat Application is a lightweight, user-friendly interface for interacting with an AI model via Azure APIM with subscription keys.
+This AI Chat Application is a lightweight (Python fastAPI), user-friendly interface for testing with an AI model via Azure APIM with subscription keys.
+
+Response headers are captured and displayed in the Iterations windows. Showing token usage, the region is serviced by etc.
 
 - Simple and intuitive chat interface for front end testing
 - Two modes basic and advanced with different iterations from provided .csv file 
@@ -26,33 +28,36 @@ This AI Chat Application is a lightweight, user-friendly interface for interacti
    git clone https://github.com/yourusername/ai-chat-app.git
    cd ai-chat-app
    ```
+2. Rename the `config-example.json`  `config.json` 
 
-2. Create and activate a virtual environment using Conda:
+3. Create and activate a virtual environment using Conda:
    ```bash
    conda create -n ai-chat-env python=3.11
    conda activate ai-chat-env
    ```
 
-3. Install dependencies:
+4. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
 ### Running the Application
 
-1. Ensure the `config.json` file is properly set up with your Azure API credentials.
 
-2. Activate the virtual environment (if not already activated):
+1. Activate the virtual environment (if not already activated):
    ```bash
    conda activate ai-chat-env
    ```
 
-3. Run the main application script:
+2. Run the main application script:
    ```bash
    python main.py
    ```
 
-4. The application window should open, allowing you to start chatting with the AI.
+3. Control click the local server url
+![alt text](image.png) 
+
+The application window should open in default browser 
 
 ### First-Time Setup
 
@@ -62,6 +67,8 @@ When running the application for the first time, you'll need to configure the se
    ```bash
    python main.py
    ```
+1a. Control click the local server url
+![alt text](image.png) 
 
 2. Click on the "Settings" button or menu option.
 
@@ -69,20 +76,32 @@ When running the application for the first time, you'll need to configure the se
    - Enter your Azure API endpoint URL
    - Input your Azure API key
    - Select the appropriate API version
-   - Choose the AI model you want to use (if applicable)
+   - Enter the AI model names you want to use, delete examples. 
 
-4. Click "Save" to store your settings.
+4. Click "Update Configuration" to store your settings.
 
-5. Restart the application for the changes to take effect.
+5. Click "Back to chat" 
 
-Note: Your settings will be saved in the `config.json` file. This file is gitignored to prevent accidental commits of sensitive information.
+Note: Your APIM settings will be saved in the `config.json` file. This file is gitignored to prevent accidental commits of sensitive information.
+
+Models are storted in models.txt 
 
 ## Usage
 
+Basic Mode:
 1. Type your message in the input field at the bottom of the window.
 2. Press Enter or click the Send button to submit your message.
-3. The AI's response will appear in the chat history above.
+3. The AI's response (only first sentance") will appear in the window beow with some of the resonse headers.
 
-## Configuration
+Advanced Mode.
+Will select user and system messages from the messages.csv
+ - To randomly re-order csv click "Randomize CSV" button
+ - Set the desired number or itterations (messages to send)
+ - clcik "Send"
+ Each completed response (first sentance + response headers) in turn will display in the Iterations windows below.
 
-An example `config.json` file is provided with placeholders for the necessary API credentials:
+Disclaimer:
+This is a simple tool for testing and learning. It is not intended for production use.
+
+
+
