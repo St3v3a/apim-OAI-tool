@@ -57,7 +57,7 @@ Response headers are captured and displayed in the Iterations windows. Showing t
 3. Control click the local server url top open in default browser 
 ![http://127.0.0.1:800](images/image.png)
 
-or open browser and go to :  http://127.0.0.1:800
+or open browser and go to :  http://127.0.0.1:8000
 
 The application window should open in default browser 
 
