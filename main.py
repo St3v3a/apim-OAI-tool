@@ -19,8 +19,8 @@ def load_config():
         with open('config.json', 'r') as f:
             return json.load(f)
     default_config = {
-        "azure_endpoint": "https://apimukdev.azure-api.net/satest1/",
-        "api_key": "20534bb7c598414189e64dab9fd1c21d",
+        "azure_endpoint": "",
+        "api_key": "",
         "api_version": "2024-06-01"
     }
     save_config(default_config)
