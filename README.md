@@ -86,7 +86,9 @@ or open browser and go to :  http://127.0.0.1:800
 
 Note: Your APIM settings will be saved in the `config.json` file. This file is gitignored to prevent accidental commits of sensitive information.
 
-Models are storted in models.txt 
+In Production consider changing code to use keyvault or managed ID.
+
+Models are stored in models.txt 
 
 ## Usage
 

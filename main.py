@@ -17,11 +17,20 @@ templates = Jinja2Templates(directory="templates")
 def load_config():
     if os.path.exists('config.json'):
         with open('config.json', 'r') as f:
-            return json.load(f)
+            loaded_config = json.load(f)
+        default_config = {
+            "azure_endpoint": "",
+            "api_key": "",
+            "api_version": "",
+            "last_selected_model": ""
+        }
+        default_config.update(loaded_config)
+        return default_config
     default_config = {
-        "azure_endpoint": "https://apimukdev.azure-api.net/satest1/",
-        "api_key": "20534bb7c598414189e64dab9fd1c21d",
-        "api_version": "2024-06-01"
+        "azure_endpoint": "",
+        "api_key": "",
+        "api_version": "",
+        "last_selected_model": ""
     }
     save_config(default_config)
     return default_config
@@ -78,7 +87,12 @@ def read_messages_from_csv():
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     models = read_models()
-    return templates.TemplateResponse("index.html", {"request": request, "models": models})
+    last_model = config.get("last_selected_model", "")
+    return templates.TemplateResponse("index.html", {
+        "request": request, 
+        "models": models,
+        "last_selected_model": last_model
+    })
 
 @app.post("/chat")
 async def chat(
@@ -88,6 +102,9 @@ async def chat(
     mode: str = Form(...),
     iterations: int = Form(1)
 ):
+    config["last_selected_model"] = model
+    save_config(config)
+
     async def generate_response():
         try:
             print(f"Using model: {model}")  # Log the model being used
@@ -100,7 +117,7 @@ async def chat(
                 iterations_to_run = 1
             else:  # advanced mode
                 csv_messages = read_messages_from_csv()
-                iterations_to_run = min(iterations, len(csv_messages))
+                iterations_to_run = min(iterations, len(csv_messages),)
 
             for i in range(iterations_to_run):
                 if mode == "advanced":
